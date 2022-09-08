@@ -1,10 +1,10 @@
 import { Component } from "react";
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button'
-import Login from '../components/Login.js'
-import Logout from '../components/Logout.js'
-import UpdateLocation from '../components/UpdateLocation.js'
+import Button from 'react-bootstrap/Button';
+import UpdateLocation from '../components/UpdateLocation.js';
+import Login from '../components/Login.js';
+import ImgCarousel from '../components/ImgCarousel';
 import './Profile.css';
 
 const SERVER = process.env.REACT_APP_SERVER;
@@ -21,7 +21,7 @@ class Profile extends Component {
           name: 'initial state',
           address: 'initial state',
           notes: '',
-          image: 'initial state',
+          images: [],
           types: ['initial state', 'initial state'],
           lat: 45,
           lng: 45,
@@ -33,6 +33,7 @@ class Profile extends Component {
 
   componentDidMount = async () => {
     try {
+      this.props.disablePlaces();
       if (this.props.auth0.isAuthenticated) {
         const res = await this.props.auth0.getIdTokenClaims();
         const token = res.__raw;
@@ -57,6 +58,9 @@ class Profile extends Component {
         url: '/place'
       }
       const getLocationData = await axios(config);
+      console.log('-------getLocationData.data------')
+      console.log(getLocationData.data)
+      console.log(getLocationData.data[0].images)
       this.setState({
         favoriteLocations: getLocationData.data
       })
@@ -112,11 +116,10 @@ class Profile extends Component {
             ?
             <div className="profile-container" >
               <div className="profile-information" >
-                <Logout />
-                <h3>Profile Information</h3>
-                <h4>{this.state.name}</h4>
-                <p>{this.state.email}</p>
-                <img src={this.state.picture} alt={` - ${this.state.name} - pic`} />
+                <h3 className="profile-title">Profile Information</h3>
+                <h4 className="profile-name">{this.state.name}</h4>
+                <p className="profile-email">{this.state.email}</p>
+                <img className="profile-img" src={this.state.picture} alt={` - ${this.state.name} - pic`} />
               </div>
               <div className="favorite-locations" >
                 <h3>Favorite Locations</h3>
@@ -127,9 +130,12 @@ class Profile extends Component {
                         <h3 className="location-name">{location.name}</h3>
                         <h4 className="address" >{location.address}</h4>
                         <p className="notes" >Notes: {location.notes}</p>
-                        <img className="location-image" src={location.image} alt={location.name} />
-                        <UpdateLocation handleUpdate={this.handleUpdate} location={location} />
-                        <Button onClick={() => this.handleDelete(location)} size="sm" variant="danger" >Delete Location</Button>
+                        <p className="types" >Type: {location.types.join(', ')} </p>
+                        <div className="carousel-container" >
+                          <ImgCarousel location={location} />
+                        </div>
+                          <UpdateLocation handleUpdate={this.handleUpdate} location={location} />
+                          <Button className="button delete-button" onClick={() => this.handleDelete(location)} size="sm" variant="danger" >Delete Location</Button>
                       </div>
                     )
                   })
@@ -138,8 +144,8 @@ class Profile extends Component {
             </div>
             :
             <>
+              <h1>Please Sign In</h1>
               <Login />
-              <h1>Not Authenticated</h1>
             </>
         }
       </>
