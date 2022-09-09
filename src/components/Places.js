@@ -19,7 +19,6 @@ function Places(props) {
 
   const onLoad = (autocomplete) => {
     setAutoComplete(autocomplete);
-    console.log('Autocomplete: ', autocomplete);
   }
 
   const onPlaceChanged = () => {
@@ -36,7 +35,7 @@ function Places(props) {
       setLat(newLat);
       setLng(newLng);
       setPlaceId(place.place_id);
-      props?.mapRef.panTo({lat: newLat, lng: newLng});
+      props.mapRef.setCenter({lat: newLat, lng: newLng});
     } else {
       console.log('Autocomplete is not loaded yet!');
     }
@@ -50,7 +49,6 @@ function Places(props) {
       } else {
         const res = await getIdTokenClaims();
         const token = res.__raw;
-        console.log(token);
         const config = {
           headers: { Authorization: `Bearer ${token}` },
           method: 'post',

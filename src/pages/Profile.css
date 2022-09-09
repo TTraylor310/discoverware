@@ -2,6 +2,19 @@
     box-sizing: border-box !important;
 }
 
+.sign-in {
+    display: grid;
+    justify-content: center;
+    width:40%;
+    height: 40%;
+    background-color: rgba(245, 245, 245, 0.8);
+    margin: auto;
+    margin-top: 30vh;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    gap: 1rem;
+}
+
 .profile-container {
     display: grid;
     grid-template-rows: 20% 80%;
@@ -72,6 +85,10 @@
     align-self: center !important;
 }
 
+.modal-title {
+    margin: 0 auto;
+}
+
 .modal-image {
     max-width: 100% !important;
     max-height: 100% !important;
@@ -81,6 +98,11 @@
     width: 100% !important;
     max-width: 97vw !important;
     margin: 0 !important;
+}
+
+.update-button-group {
+    width: fit-content;
+    margin: 1rem auto 0 !important;
 }
 
 .image-list {
@@ -96,4 +118,8 @@
 .image-item {
     max-height: 7rem;
     width: auto;
+}
+
+.button {
+    margin: 0 0.2rem;
 }

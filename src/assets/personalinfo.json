@@ -1,4 +1,19 @@
 [
+    
+    {
+        "personName": "Jacob Dang",
+        "personData": "Formerly self-taught and currently a full stacked developer through Code Fellows intermediate software program.",
+        "personImg": "./images/jacob.jpg",
+        "github":"https://github.com/JacobDangCS50",
+        "linkedin": "https://www.linkedin.com/in/jacob-dang-a19210209"
+    },
+    {
+        "personName": "Tim Traylor",
+        "personData": "Developed a passion for learning new skills and diving into the details with my team. I am excited to continue my journey in full stack Javascript and see where it leads.",
+        "personImg": "./images/tray-profile-pic.jpg",
+        "github": "https://github.com/ttraylor310",
+        "linkedin": "https://www.linkedin.com/in/ttraylor310"
+    },
     {
         "personName": "Branden Ge",
         "personData": "Software engineer and Marine Corps veteran passionate about creating amazing user and community experiences, and making an impact in the areas of automation, education, entrepreneurship, writing, and games.",
@@ -12,19 +27,5 @@
         "personImg": "./images/isaiah.jpg",
         "github": "https://github.com/ijkeller",
         "linkedin": "https://www.linkedin.com/in/isaiahkeller/"
-    },
-    {
-        "personName": "Jacob Dang",
-        "personData": "Formerly self-taught and currently a full stacked developer through Code Fellows intermediate software program",
-        "personImg": "./images/jacob.jpg",
-        "github":"https://github.com/JacobDangCS50",
-        "linkedin": "https://www.linkedin.com/in/jacob-dang-a19210209"
-    },
-    {
-        "personName": "Tim Traylor",
-        "personData": "Born in Los Angeles, grew up on a sailboat with my family, joined the Navy at 21, and haven't seen enough of the ocean! After 12 years as a nuclear electrician on submarines and 5 years with King County as an electrical & instrumentation supervisor, I have developed a passion for learning new skills and diving into the details with my team. I am excited to continue my journey in full stack Javascript and see where it leads.",
-        "personImg": "./images/tray-profile-pic.jpg",
-        "github": "https://github.com/ttraylor310",
-        "linkedin": "https://www.linkedin.com/in/ttraylor310"
     }
 ]

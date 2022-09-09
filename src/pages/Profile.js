@@ -6,6 +6,7 @@ import UpdateLocation from '../components/UpdateLocation.js';
 import Login from '../components/Login.js';
 import ImgCarousel from '../components/ImgCarousel';
 import './Profile.css';
+import { Link } from 'react-router-dom';
 
 const SERVER = process.env.REACT_APP_SERVER;
 
@@ -13,16 +14,16 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'initial state',
-      email: 'initial state',
-      picture: 'initial state',
+      name: '',
+      email: '',
+      picture: '',
       favoriteLocations: [
         {
-          name: 'initial state',
-          address: 'initial state',
+          name: '',
+          address: '',
           notes: '',
           images: [],
-          types: ['initial state', 'initial state'],
+          types: [''],
           lat: 45,
           lng: 45,
           place_id: 4545
@@ -34,16 +35,18 @@ class Profile extends Component {
   componentDidMount = async () => {
     try {
       this.props.disablePlaces();
-      if (this.props.auth0.isAuthenticated) {
-        const res = await this.props.auth0.getIdTokenClaims();
-        const token = res.__raw;
-        this.setState({
-          name: res.name,
-          email: res.email,
-          picture: res.picture
-        });
-        this.getLocations(token);
-      }
+      setTimeout(async () => {
+        if (this.props.auth0.isAuthenticated) {
+          const res = await this.props.auth0.getIdTokenClaims();
+          const token = res.__raw;
+          this.setState({
+            name: res.name,
+            email: res.email,
+            picture: res.picture
+          });
+          this.getLocations(token);
+        }
+      }, 1000);
     } catch (error) {
       console.error('Error in Profile.js componentDidMount', error);
     }
@@ -58,9 +61,6 @@ class Profile extends Component {
         url: '/place'
       }
       const getLocationData = await axios(config);
-      console.log('-------getLocationData.data------')
-      console.log(getLocationData.data)
-      console.log(getLocationData.data[0].images)
       this.setState({
         favoriteLocations: getLocationData.data
       })
@@ -70,6 +70,7 @@ class Profile extends Component {
   }
 
   handleUpdate = async (locationToUpdate) => {
+    console.log('handleUpdate')
     try {
       const res = await this.props.auth0.getIdTokenClaims();
       const token = res.__raw;
@@ -80,9 +81,7 @@ class Profile extends Component {
         url: `/place/${locationToUpdate._id}`,
         data: locationToUpdate
       }
-      const updatedLocation = await axios(config);
-      console.log('updatedLocation: ');
-      console.table(updatedLocation);
+      await axios(config);
       this.getLocations(token);
 
     } catch (error) {
@@ -106,6 +105,10 @@ class Profile extends Component {
     } catch (error) {
       console.error('Error in handleDelete: ', error);
     }
+  }
+
+  handleGoToLocation = (location) => {
+    this.props.setCenter({lat: location.lat, lng: location.lng});
   }
 
   render() {
@@ -136,8 +139,13 @@ class Profile extends Component {
                         <div className="carousel-container" >
                           <ImgCarousel location={location} />
                         </div>
+                        <Link to="/">
+                          <Button className="button go-to-button" onClick={() => this.handleGoToLocation(location)} size="sm" variant="primary" >
+                            Go To Location
+                          </Button>
+                        </Link>
                         <UpdateLocation handleUpdate={this.handleUpdate} location={location} />
-                        <Button className="button delete-button" onClick={() => this.handleDelete(location)} size="sm" variant="danger" >Delete Location</Button>
+                        <Button className="button delete-button" onClick={() => this.handleDelete(location)} size="sm" variant="danger">Delete Location</Button>
                       </div>
                     )
                   })
@@ -145,10 +153,10 @@ class Profile extends Component {
               </div>
             </div>
             :
-            <>
+            <div className="sign-in">
               <h1>Please Sign In</h1>
               <Login />
-            </>
+            </div>
         }
       </>
     );

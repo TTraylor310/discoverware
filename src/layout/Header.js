@@ -8,7 +8,7 @@ import { ReactComponent as HomeIcon } from '../svg/home-svgrepo-com.svg';
 import { ReactComponent as ProfileIcon } from '../svg/person-circle-svgrepo-com.svg';
 import { withAuth0 } from '@auth0/auth0-react';
 import { ReactComponent as AboutIcon } from '../svg/question-svgrepo-com.svg';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import './Header.css';
 import Places from '../components/Places';
 
@@ -16,8 +16,12 @@ class Header extends Component {
   render() {
     return (
       <header className='Header'>
-        <h2>DiscoverWare</h2>
-        <Places mapRef={this.props.mapRef} libraries={this.props.libraries}
+        <Link to="/" className="siteName">
+          <h2>DiscoverWare</h2>
+        </Link>
+        <Places
+          mapRef={this.props.mapRef}
+          libraries={this.props.libraries}
           placesIsEnabled={this.props.placesIsEnabled}
         />
         <Navbar expand="lg" variant="secondary">
