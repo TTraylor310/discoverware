@@ -6,7 +6,15 @@ const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
   // console.log('useAuth0: ')
 // console.table(useAuth0.return)
-  return <Button  size="sm" variant="secondary" onClick={() => loginWithRedirect()}>Log In</Button>;
+  return (
+    <Button
+      size="sm"
+      variant="secondary"
+      onClick={() => loginWithRedirect()}
+    >
+      Log In
+    </Button>
+  );
 };
 
 export default LoginButton;

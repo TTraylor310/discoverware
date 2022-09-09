@@ -14,16 +14,16 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'initial state',
-      email: 'initial state',
-      picture: 'initial state',
+      name: '',
+      email: '',
+      picture: '',
       favoriteLocations: [
         {
-          name: 'initial state',
-          address: 'initial state',
+          name: '',
+          address: '',
           notes: '',
           images: [],
-          types: ['initial state', 'initial state'],
+          types: [''],
           lat: 45,
           lng: 45,
           place_id: 4545
@@ -35,16 +35,18 @@ class Profile extends Component {
   componentDidMount = async () => {
     try {
       this.props.disablePlaces();
-      if (this.props.auth0.isAuthenticated) {
-        const res = await this.props.auth0.getIdTokenClaims();
-        const token = res.__raw;
-        this.setState({
-          name: res.name,
-          email: res.email,
-          picture: res.picture
-        });
-        this.getLocations(token);
-      }
+      setTimeout(async () => {
+        if (this.props.auth0.isAuthenticated) {
+          const res = await this.props.auth0.getIdTokenClaims();
+          const token = res.__raw;
+          this.setState({
+            name: res.name,
+            email: res.email,
+            picture: res.picture
+          });
+          this.getLocations(token);
+        }
+      }, 1000);
     } catch (error) {
       console.error('Error in Profile.js componentDidMount', error);
     }

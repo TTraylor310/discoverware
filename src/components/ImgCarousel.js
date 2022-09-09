@@ -3,9 +3,6 @@ import Carousel from 'react-bootstrap/Carousel';
 import Modal from 'react-bootstrap/Modal';
 import '../pages/Profile.css'
 
-
-
-
 export default class ImgCarousel extends React.Component {
     constructor(props) {
         super(props);
@@ -16,11 +13,10 @@ export default class ImgCarousel extends React.Component {
     }
 
     handleOpen = (imagePath) => {
-        this.setState({ 
+        this.setState({
             image: imagePath,
             showModal: true
-         })
-    
+        })
     }
 
     handleClose = () => {

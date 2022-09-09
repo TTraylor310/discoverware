@@ -9,7 +9,7 @@ function MapContainer(props) {
   let [lng, setLng] = useState(0);
 
   const mapStyles = {
-    height: "93vh",
+    height: "92vh",
     width: "100%"
   };
 
