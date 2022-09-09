@@ -34,7 +34,7 @@
 - Set .env according to .envsample
 - Test using npm test (for frontend) and nodemon (for backend)
 - Requires personal database as well as authentication token for testing
-- Run node seed.js to seed database
+- Run node seed.js from terminal to seed database
 
 ## API Endpoints & Examples:
 - '/place' would allow the user to access the database endpoint for saved locations, used for GET & POST
