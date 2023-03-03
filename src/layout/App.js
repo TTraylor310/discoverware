@@ -73,6 +73,7 @@ class App extends Component {
             libraries={App.libraries}
             placesIsEnabled={this.state.placesIsEnabled}
           />
+
           <Routes>
             <Route
               exact path="/"
